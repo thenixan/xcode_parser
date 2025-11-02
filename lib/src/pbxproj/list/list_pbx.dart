@@ -27,9 +27,27 @@ class ListPbx extends NamedComponent {
     return sb.toString();
   }
 
-  add(ElementOfListPbx element) {
+  void add(ElementOfListPbx element) {
     _children.add(element);
   }
+
+  void insert(int index, ElementOfListPbx element) {
+    _children.insert(index, element);
+  }
+
+  void insertAll(int index, Iterable<ElementOfListPbx> iterable) {
+    _children.insertAll(index, iterable);
+  }
+
+  ElementOfListPbx get first => _children.first;
+
+  ElementOfListPbx get last => _children.last;
+
+  ElementOfListPbx removeAt(int index) => _children.removeAt(index);
+
+  ElementOfListPbx removeLast() => _children.removeLast();
+
+  void remove(Object? value) => _children.remove(value);
 
   @override
   ListPbx copyWith({
