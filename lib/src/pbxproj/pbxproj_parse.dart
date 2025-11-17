@@ -329,9 +329,12 @@ Pbxproj parsePbxproj(String content, String path, {bool debug = false}) {
       }
     }
 
+    var openingWasEncountered = false;
+
     while (index < content.length) {
       skipPattern(';');
       if (current().startsWith('{')) {
+        openingWasEncountered = true;
         printD('J FOUND {');
         skipPattern('{');
       } else
@@ -348,7 +351,10 @@ Pbxproj parsePbxproj(String content, String path, {bool debug = false}) {
         addChild(parseMap());
       } else if (current().startsWith('//')) {
         printD('J FOUND comment //');
-        addChild(parseCommentLine());
+        final comment = parseCommentLine();
+        if (openingWasEncountered) {
+          addChild(comment);
+        }
       } else if (current().startsWith('/*')) {
         printD('J FOUND Comment /*');
         final comment = parseComment();
