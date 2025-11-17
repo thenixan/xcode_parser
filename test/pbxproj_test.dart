@@ -41,8 +41,9 @@ void main() {
     });
 
     test('Open Pbxproj file from string', () {
-      final openedProject =
-          Pbxproj.parse('// !\$*UTF8*\$!\n{\n // !\$*UTF8*\$!\n}', path: tempFilePath);
+      final openedProject = Pbxproj.parse(
+          '// !\$*UTF8*\$!\n{\n // !\$*UTF8*\$!\n}',
+          path: tempFilePath);
       expect(openedProject.path, tempFilePath);
 
       expect(
